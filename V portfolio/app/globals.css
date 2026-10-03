@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-paper: #f8f4ec;
+  --color-cream: #fffdf9;
+  --color-ink: #2a2420;
+  --color-mute: #7b7064;
+  --color-line: #e7ddcd;
+  --color-gold: #a98550;
+  --color-blush: #ecd9cc;
+  --font-serif: var(--font-cormorant), "Times New Roman", serif;
+  --font-sans: var(--font-jost), system-ui, sans-serif;
+}
+
+html { color-scheme: only light; background: var(--color-paper); scroll-padding-top: 80px; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+body { background: var(--color-paper); color: var(--color-ink); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; overflow-x: clip; }
+body::after {
+  content: ""; position: fixed; inset: 0; z-index: 80; pointer-events: none; opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+::selection { background: var(--color-gold); color: #fff; }
+:focus-visible { outline: 2px solid var(--color-gold); outline-offset: 3px; border-radius: 4px; }
+
+@layer components {
+.label { font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--color-mute); font-weight: 500; }
+.display { font-family: var(--font-serif); font-weight: 300; letter-spacing: -0.02em; line-height: 0.98; }
+.h2 { font-family: var(--font-serif); font-weight: 300; letter-spacing: -0.02em; line-height: 1; font-size: clamp(2.4rem, 6vw, 5rem); }
+}
+
+html.has-cursor, html.has-cursor a, html.has-cursor button, html.has-cursor input, html.has-cursor textarea, html.has-cursor [data-cursor] { cursor: none; }
+
+.glow-a { background: radial-gradient(closest-side, rgba(236, 217, 204, 0.75), transparent); animation: drift 22s ease-in-out infinite alternate; }
+.glow-b { background: radial-gradient(closest-side, rgba(233, 220, 197, 0.7), transparent); animation: drift 28s ease-in-out infinite alternate-reverse; }
+@keyframes drift { from { transform: translate3d(0, 0, 0) scale(1); } to { transform: translate3d(60px, 40px, 0) scale(1.12); } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
